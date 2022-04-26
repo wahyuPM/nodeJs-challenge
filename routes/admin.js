@@ -13,16 +13,13 @@ const router = express.Router();
 router.get('/add-product', isAuth, adminController.getAddProduct);
 
 // /admin/products => GET
-router.get('/products', adminController.getProducts);
+router.get('/products', isAuth, adminController.getProducts);
 
 // /admin/add-product => POST
 router.post('/add-product', [
     body('title')
         .isString()
         .isLength({ min: 3 })
-        .trim(),
-    body('imageUrl')
-        .isURL()
         .trim(),
     body('price')
         .isFloat()
@@ -38,9 +35,6 @@ router.post('/edit-product', [
     body('title')
         .isString()
         .isLength({ min: 3 })
-        .trim(),
-    body('imageUrl')
-        .isURL()
         .trim(),
     body('price')
         .isFloat()
