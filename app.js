@@ -61,15 +61,17 @@ const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'),
   flags: 'a'
 })
 
-app.use(helmet.contentSecurityPolicy({
-  directives: {
-    'default-src': ["'self'"],
-    'script-src': ["'self'", "'unsafe-inline'", 'js.stripe.com'],
-    'style-src': ["'self'", "'unsafe-inline'", 'fonts.googleapis.com'],
-    'frame-src': ["'self'", 'js.stripe.com'],
-    'font-src': ["'self'", 'fonts.googleapis.com', 'fonts.gstatic.com']
-  },
-}));
+// app.use(
+//   helmet.contentSecurityPolicy({
+//     directives: {
+//       'default-src': ["'self'"],
+//       'script-src': ["'self'", "'unsafe-inline'", 'js.stripe.com'],
+//       'style-src': ["'self'", "'unsafe-inline'", 'fonts.googleapis.com'],
+//       'frame-src': ["'self'", 'js.stripe.com'],
+//       'font-src': ["'self'", 'fonts.googleapis.com', 'fonts.gstatic.com']
+//     },
+//   })
+// )
 
 app.use(compression());
 app.use(morgan('combined', { stream: accessLogStream }));
